@@ -1,0 +1,58 @@
+.contaiener {
+  margin: 4rem auto;
+  width: 1000px;
+  height: auto;
+  /* border: 1px black solid; */
+  -webkit-box-shadow: 4px 14px 26px -9px rgba(142, 137, 137, 0.6);
+  box-shadow: 4px 14px 26px -9px rgba(142, 137, 137, 0.6);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 0.5rem;
+}
+.contaiener h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.contaiener h3 {
+  text-align: center;
+  color: gray;
+}
+.contaiener table {
+  width: 100%;
+  text-align: center;
+}
+.contaiener tr:nth-child(even) {
+  background-color: rgba(142, 137, 137, 0.5);
+}
+.contaiener tr:first-child:hover {
+  opacity: 1;
+}
+.contaiener tr:hover {
+  opacity: 0.5;
+}
+.contaiener td {
+  text-align: center;
+  height: 30px;
+}
+.contaiener input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: 2px;
+}
+.contaiener button {
+  border: none;
+  position: relative;
+  top: -1.5px;
+  margin-right: 4px;
+  border-radius: 2px;
+  padding: 3px;
+}
+.delete {
+  background-color: rgb(217, 68, 68);
+  color: white;
+}
+.edit {
+  background-color: rgb(255, 224, 19);
+  color: white;
+}

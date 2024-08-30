@@ -6,6 +6,11 @@ import ContactList from "./components/ContactList";
 function App() {
   const [AddFormDisplay, changeAddFormDisplay] = useState(false);
   const [contacts, setContacts] = useState([]);
+
+  const deleteHandler = (id) => {
+    const newContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(newContacts);
+  };
   return (
     <>
       <Header changeAddFormDisplay={changeAddFormDisplay} />
@@ -17,7 +22,7 @@ function App() {
           setContacts={setContacts}
         />
       ) : (
-        <ContactList contacts={contacts} />
+        <ContactList contacts={contacts} deleteHandler={deleteHandler} />
       )}
     </>
   );
