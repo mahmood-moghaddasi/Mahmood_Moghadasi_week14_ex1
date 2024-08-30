@@ -1,8 +1,8 @@
 import styles from "../styles/Header.module.css";
 
-function Header(props) {
+function Header({ changeAddFormDisplay }) {
   const AddContactDisplayHandler = () => {
-    props.changeAddFormDisplay(true);
+    changeAddFormDisplay(true);
   };
   return (
     <>

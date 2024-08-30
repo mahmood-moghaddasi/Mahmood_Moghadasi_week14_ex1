@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddForm from "./components/AddForm";
 import Header from "./components/Header";
+import ContactList from "./components/ContactList";
 
 function App() {
   const [AddFormDisplay, changeAddFormDisplay] = useState(false);
@@ -9,12 +10,14 @@ function App() {
     <>
       <Header changeAddFormDisplay={changeAddFormDisplay} />
 
-      {AddFormDisplay && (
+      {AddFormDisplay ? (
         <AddForm
           changeAddFormDisplay={changeAddFormDisplay}
           contacts={contacts}
           setContacts={setContacts}
         />
+      ) : (
+        <ContactList contacts={contacts} />
       )}
     </>
   );
