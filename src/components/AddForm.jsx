@@ -30,7 +30,8 @@ function AddForm({ changeAddFormDisplay, contacts, setContacts }) {
   return (
     <>
       <div className={styles.container}>
-        <form action="">
+        <h1>Add Contact</h1>
+        <form className={styles.form}>
           <input
             type="text"
             name="name"
@@ -66,7 +67,7 @@ function AddForm({ changeAddFormDisplay, contacts, setContacts }) {
             placeholder="Phone Number"
             onChange={formHandler}
           />
-          <button onClick={addHandler}>Add</button>
+          <button onClick={addHandler}>Add Contact</button>
         </form>
       </div>
     </>
