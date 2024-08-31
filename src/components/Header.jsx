@@ -1,6 +1,6 @@
 import styles from "../styles/Header.module.css";
 
-function Header({ changeAddFormDisplay, deleteSelected }) {
+function Header({ changeAddFormDisplay, deleteSelected, AddFormDisplay }) {
   const AddContactDisplayHandler = () => {
     changeAddFormDisplay(true);
   };
@@ -14,9 +14,11 @@ function Header({ changeAddFormDisplay, deleteSelected }) {
           >
             Add Contact
           </button>
-          <button className={styles.deleteSelected} onClick={deleteSelected}>
-            Delete Selected
-          </button>
+          {!AddFormDisplay && (
+            <button className={styles.deleteSelected} onClick={deleteSelected}>
+              Delete Selected
+            </button>
+          )}
         </div>
         <div className={styles.search}>
           <input placeholder="Search Here" type="text" />

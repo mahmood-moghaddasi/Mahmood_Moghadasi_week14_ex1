@@ -35,6 +35,7 @@ function App() {
       <Header
         changeAddFormDisplay={changeAddFormDisplay}
         deleteSelected={deleteSelected}
+        AddFormDisplay={AddFormDisplay}
       />
 
       {AddFormDisplay ? (
