@@ -1,4 +1,5 @@
 import styles from "../styles/Header.module.css";
+import Search from "./Search";
 
 function Header({
   changeAddFormDisplay,
@@ -6,6 +7,8 @@ function Header({
   AddFormDisplay,
   diplayDeleteSelectedButton,
   setDisplayDeleteSelectedButton,
+  contacts,
+  setSearchedContacts,
 }) {
   const AddContactDisplayHandler = () => {
     changeAddFormDisplay(true);
@@ -27,9 +30,7 @@ function Header({
             </button>
           )}
         </div>
-        <div className={styles.search}>
-          <input placeholder="Search Here" type="text" />
-        </div>
+        <Search contacts={contacts} setSearchedContacts={setSearchedContacts} />
       </div>
     </>
   );

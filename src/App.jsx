@@ -17,6 +17,7 @@ function App() {
     id: "",
   });
   const [selectedContactsId, setSelectedContactsId] = useState([]);
+  const [searchedContacts, setSearchedContacts] = useState([]);
 
   const deleteHandler = (id) => {
     const newContacts = contacts.filter((contact) => contact.id !== id);
@@ -39,6 +40,8 @@ function App() {
         AddFormDisplay={AddFormDisplay}
         diplayDeleteSelectedButton={diplayDeleteSelectedButton}
         setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
+        contacts={contacts}
+        setSearchedContacts={setSearchedContacts}
       />
 
       {AddFormDisplay ? (
@@ -58,6 +61,7 @@ function App() {
           setSelectedContactsId={setSelectedContactsId}
           setContacts={setContacts}
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
+          searchedContacts={searchedContacts}
         />
       )}
     </>

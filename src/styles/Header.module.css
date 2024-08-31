@@ -32,22 +32,3 @@
   -webkit-box-shadow: 4px 14px 26px -9px rgba(255, 255, 255, 0.6);
   box-shadow: 4px 14px 26px -9px rgba(255, 255, 255, 0.6);
 }
-.search {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-}
-.container input {
-  height: 50px;
-  width: 80%;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  padding: 0 2rem;
-  font-size: 18px;
-}
-.container input:focus {
-  -webkit-box-shadow: 4px 14px 26px -9px rgba(255, 255, 255, 0.6);
-  box-shadow: 4px 14px 26px -9px rgba(255, 255, 255, 0.6);
-}
