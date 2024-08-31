@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
-function AddForm({ changeAddFormDisplay, contacts, setContacts }) {
-  const [contact, setContact] = useState({
-    name: "",
-    lastName: "",
-    job: "",
-    email: "",
-    phone: 0,
-    id: "",
-  });
+function AddForm({
+  changeAddFormDisplay,
+  contacts,
+  setContacts,
+  contact,
+  setContact,
+}) {
   const formHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -26,6 +24,7 @@ function AddForm({ changeAddFormDisplay, contacts, setContacts }) {
       email: "",
       phone: 0,
       id: "",
+      selected: false,
     });
     changeAddFormDisplay(false);
   };

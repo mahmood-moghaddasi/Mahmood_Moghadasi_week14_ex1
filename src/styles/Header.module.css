@@ -7,7 +7,11 @@
   align-items: center;
   padding: 0 4rem;
 }
-.addButton {
+.buttons {
+  display: flex;
+}
+.addButton,
+.deleteSelected {
   height: 50px;
   width: 100px;
   background-color: white;
@@ -16,8 +20,15 @@
   cursor: pointer;
   font-weight: 700;
   color: grey;
+  margin-right: 5px;
 }
-.addButton:hover {
+.deleteSelected {
+  background-color: rgb(253, 71, 71);
+  color: white;
+  width: 110px;
+}
+.addButton:hover,
+.deleteSelected:hover {
   -webkit-box-shadow: 4px 14px 26px -9px rgba(255, 255, 255, 0.6);
   box-shadow: 4px 14px 26px -9px rgba(255, 255, 255, 0.6);
 }

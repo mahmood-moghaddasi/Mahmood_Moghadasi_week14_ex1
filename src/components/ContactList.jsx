@@ -1,6 +1,32 @@
+import { useState } from "react";
 import styles from "../styles/ContactList.module.css";
 
-function ContactList({ contacts, deleteHandler }) {
+function ContactList({
+  contacts,
+  deleteHandler,
+  selectedContactsId,
+  setSelectedContactsId,
+}) {
+  const selectHandler = (id) => {
+    let flag = false;
+    selectedContactsId.forEach((contactId) => {
+      if (contactId === id) {
+        let newIdList = [];
+        selectedContactsId.forEach((newId) => {
+          if (newId !== id) newIdList.push(newId);
+          setSelectedContactsId([...newIdList]);
+          flag = true;
+          return;
+        });
+      }
+      if (flag === true) return;
+    });
+
+    console.log(selectedContactsId);
+    if (flag === true) return;
+    setSelectedContactsId([...selectedContactsId, id]);
+    console.log("after");
+  };
   return (
     <>
       <div className={styles.contaiener}>
@@ -30,7 +56,10 @@ function ContactList({ contacts, deleteHandler }) {
                     Delete
                   </button>
                   <button className={styles.edit}>Edit</button>
-                  <input type="checkBox" />
+                  <input
+                    onClick={() => selectHandler(contact.id)}
+                    type="checkBox"
+                  />
                 </td>
               </tr>
             ))}

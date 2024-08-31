@@ -1,18 +1,21 @@
 import styles from "../styles/Header.module.css";
 
-function Header({ changeAddFormDisplay }) {
+function Header({ changeAddFormDisplay, deleteSelected }) {
   const AddContactDisplayHandler = () => {
     changeAddFormDisplay(true);
   };
   return (
     <>
       <div className={styles.container}>
-        <div className="buttons">
+        <div className={styles.buttons}>
           <button
             className={styles.addButton}
             onClick={AddContactDisplayHandler}
           >
             Add Contact
+          </button>
+          <button className={styles.deleteSelected} onClick={deleteSelected}>
+            Delete Selected
           </button>
         </div>
         <div className={styles.search}>
