@@ -17,6 +17,7 @@ function EditForm({
   const submitHandler = (event) => {
     event.preventDefault();
     setDisplayEditForm(false);
+    setDisplayDeleteSelectedButton(true);
     submitEditChanges();
   };
   const cancelButtonHandler = () => {
