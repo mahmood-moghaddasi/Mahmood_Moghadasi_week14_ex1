@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import ContactList from "./components/ContactList";
 
 function App() {
+  const [diplayDeleteSelectedButton, setDisplayDeleteSelectedButton] =
+    useState(true);
   const [AddFormDisplay, changeAddFormDisplay] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
@@ -13,7 +15,6 @@ function App() {
     email: "",
     phone: 0,
     id: "",
-    selected: false,
   });
   const [selectedContactsId, setSelectedContactsId] = useState([]);
 
@@ -36,6 +37,8 @@ function App() {
         changeAddFormDisplay={changeAddFormDisplay}
         deleteSelected={deleteSelected}
         AddFormDisplay={AddFormDisplay}
+        diplayDeleteSelectedButton={diplayDeleteSelectedButton}
+        setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
       />
 
       {AddFormDisplay ? (
@@ -45,6 +48,7 @@ function App() {
           setContacts={setContacts}
           contact={contact}
           setContact={setContact}
+          setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
         />
       ) : (
         <ContactList
@@ -52,6 +56,8 @@ function App() {
           deleteHandler={deleteHandler}
           selectedContactsId={selectedContactsId}
           setSelectedContactsId={setSelectedContactsId}
+          setContacts={setContacts}
+          setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
         />
       )}
     </>

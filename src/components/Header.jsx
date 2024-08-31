@@ -1,8 +1,15 @@
 import styles from "../styles/Header.module.css";
 
-function Header({ changeAddFormDisplay, deleteSelected, AddFormDisplay }) {
+function Header({
+  changeAddFormDisplay,
+  deleteSelected,
+  AddFormDisplay,
+  diplayDeleteSelectedButton,
+  setDisplayDeleteSelectedButton,
+}) {
   const AddContactDisplayHandler = () => {
     changeAddFormDisplay(true);
+    setDisplayDeleteSelectedButton(false);
   };
   return (
     <>
@@ -14,7 +21,7 @@ function Header({ changeAddFormDisplay, deleteSelected, AddFormDisplay }) {
           >
             Add Contact
           </button>
-          {!AddFormDisplay && (
+          {diplayDeleteSelectedButton && (
             <button className={styles.deleteSelected} onClick={deleteSelected}>
               Delete Selected
             </button>

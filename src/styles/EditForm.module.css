@@ -29,7 +29,7 @@
   border: none;
   outline: none;
 }
-.form button {
+.form .submitButton {
   background-color: white;
   border: none;
   border-radius: 10px;

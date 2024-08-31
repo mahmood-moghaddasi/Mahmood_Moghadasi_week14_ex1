@@ -1,88 +1,75 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import styles from "../styles/AddForm.module.css";
-function AddForm({
-  changeAddFormDisplay,
-  contacts,
-  setContacts,
-  contact,
-  setContact,
+import React from "react";
+import styles from "../styles/EditForm.module.css";
+
+function EditForm({
+  contactToEdit,
+  setContactToEdit,
+  setDisplayEditForm,
+  submitEditChanges,
   setDisplayDeleteSelectedButton,
 }) {
-  const cancelButtonHandler = () => {
-    changeAddFormDisplay(false);
-    setDisplayDeleteSelectedButton(true);
-    setContact({
-      name: "",
-      lastName: "",
-      job: "",
-      email: "",
-      phone: 0,
-      id: "",
-    });
-  };
   const formHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setContact({ ...contact, [name]: value, id: uuidv4() });
+    setContactToEdit({ ...contactToEdit, [name]: value });
   };
-  const addHandler = (event) => {
+
+  const submitHandler = (event) => {
     event.preventDefault();
-    setContacts([...contacts, contact]);
-    setContact({
-      name: "",
-      lastName: "",
-      job: "",
-      email: "",
-      phone: 0,
-      id: "",
-    });
-    changeAddFormDisplay(false);
+    setDisplayEditForm(false);
+    submitEditChanges();
+  };
+  const cancelButtonHandler = () => {
+    setDisplayEditForm(false);
     setDisplayDeleteSelectedButton(true);
   };
 
   return (
     <>
       <div className={styles.container}>
-        <h1>Add Contact</h1>
+        <h1>Edit Contact</h1>
         <form className={styles.form}>
           <input
             type="text"
+            value={contactToEdit.name}
             name="name"
-            value={contact.name}
             placeholder="First Name"
             onChange={formHandler}
           />
           <input
             type="text"
+            value={contactToEdit.lastName}
             name="lastName"
-            value={contact.lastName}
             placeholder="Last Name"
             onChange={formHandler}
           />
           <input
             type="text"
+            value={contactToEdit.job}
             name="job"
-            value={contact.job}
             placeholder="Job"
             onChange={formHandler}
           />
           <input
             type="email"
+            value={contactToEdit.email}
             name="email"
-            value={contact.email}
             placeholder="Email"
             onChange={formHandler}
           />
           <input
             type="number"
+            value={contactToEdit.phone}
             name="phone"
-            value={contact.phone}
             placeholder="Phone Number"
             onChange={formHandler}
           />
-          <button type="submit" onClick={addHandler}>
-            Add Contact
+          <button
+            type="submit"
+            className={styles.submitButton}
+            onClick={submitHandler}
+          >
+            Submit Changes
           </button>
           <button className={styles.cancelButton} onClick={cancelButtonHandler}>
             Cancel
@@ -93,4 +80,4 @@ function AddForm({
   );
 }
 
-export default AddForm;
+export default EditForm;
