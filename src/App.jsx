@@ -2,11 +2,24 @@ import { useState } from "react";
 import AddForm from "./components/AddForm";
 import Header from "./components/Header";
 import ContactList from "./components/ContactList";
+// toast
+
+import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+// toast
 
 function App() {
+  const successNotify = (message) => {
+    toast.success(message);
+  };
+  const errorNotify = (message) => {
+    toast.error(message);
+  };
   const [diplayDeleteSelectedButton, setDisplayDeleteSelectedButton] =
     useState(true);
-  const [AddFormDisplay, changeAddFormDisplay] = useState(false);
+  const [AddFormDisplay, setAddFormDisplay] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
     name: "",
@@ -22,20 +35,21 @@ function App() {
   const deleteHandler = (id) => {
     const newContacts = contacts.filter((contact) => contact.id !== id);
     setContacts(newContacts);
+    successNotify("Contact Successfuly Deleted!");
   };
 
   const deleteSelected = () => {
     const newContacts = contacts.filter((contact) => {
       if (!selectedContactsId.includes(contact.id)) return contact;
     });
-    console.log(newContacts);
     setContacts(newContacts);
+    successNotify("Contacts Successfuly Deleted!");
   };
 
   return (
     <>
       <Header
-        changeAddFormDisplay={changeAddFormDisplay}
+        setAddFormDisplay={setAddFormDisplay}
         deleteSelected={deleteSelected}
         AddFormDisplay={AddFormDisplay}
         diplayDeleteSelectedButton={diplayDeleteSelectedButton}
@@ -46,12 +60,13 @@ function App() {
 
       {AddFormDisplay ? (
         <AddForm
-          changeAddFormDisplay={changeAddFormDisplay}
+          setAddFormDisplay={setAddFormDisplay}
           contacts={contacts}
           setContacts={setContacts}
           contact={contact}
           setContact={setContact}
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
+          successNotify={successNotify}
         />
       ) : (
         <ContactList
@@ -62,8 +77,10 @@ function App() {
           setContacts={setContacts}
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
           searchedContacts={searchedContacts}
+          successNotify={successNotify}
         />
       )}
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

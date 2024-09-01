@@ -7,6 +7,7 @@ function EditForm({
   setDisplayEditForm,
   submitEditChanges,
   setDisplayDeleteSelectedButton,
+  successNotify,
 }) {
   const formHandler = (event) => {
     const name = event.target.name;
@@ -19,6 +20,7 @@ function EditForm({
     setDisplayEditForm(false);
     setDisplayDeleteSelectedButton(true);
     submitEditChanges();
+    successNotify("Changes applied!");
   };
   const cancelButtonHandler = () => {
     setDisplayEditForm(false);

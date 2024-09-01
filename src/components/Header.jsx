@@ -2,7 +2,7 @@ import styles from "../styles/Header.module.css";
 import Search from "./Search";
 
 function Header({
-  changeAddFormDisplay,
+  setAddFormDisplay,
   deleteSelected,
   AddFormDisplay,
   diplayDeleteSelectedButton,
@@ -11,7 +11,7 @@ function Header({
   setSearchedContacts,
 }) {
   const AddContactDisplayHandler = () => {
-    changeAddFormDisplay(true);
+    setAddFormDisplay(true);
     setDisplayDeleteSelectedButton(false);
   };
   return (

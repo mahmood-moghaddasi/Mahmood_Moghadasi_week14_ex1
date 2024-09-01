@@ -2,15 +2,16 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
 function AddForm({
-  changeAddFormDisplay,
+  setAddFormDisplay,
   contacts,
   setContacts,
   contact,
   setContact,
   setDisplayDeleteSelectedButton,
+  successNotify,
 }) {
   const cancelButtonHandler = () => {
-    changeAddFormDisplay(false);
+    setAddFormDisplay(false);
     setDisplayDeleteSelectedButton(true);
     setContact({
       name: "",
@@ -37,8 +38,9 @@ function AddForm({
       phone: 0,
       id: "",
     });
-    changeAddFormDisplay(false);
+    setAddFormDisplay(false);
     setDisplayDeleteSelectedButton(true);
+    successNotify("Contact Successfuly added!");
   };
 
   return (
