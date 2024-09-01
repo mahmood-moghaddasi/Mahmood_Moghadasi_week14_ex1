@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
+import inputTags from "../constants/inputs";
 function AddForm({
   setAddFormDisplay,
   contacts,
@@ -48,41 +49,16 @@ function AddForm({
       <div className={styles.container}>
         <h1>Add Contact</h1>
         <form className={styles.form}>
-          <input
-            type="text"
-            name="name"
-            value={contact.name}
-            placeholder="First Name"
-            onChange={formHandler}
-          />
-          <input
-            type="text"
-            name="lastName"
-            value={contact.lastName}
-            placeholder="Last Name"
-            onChange={formHandler}
-          />
-          <input
-            type="text"
-            name="job"
-            value={contact.job}
-            placeholder="Job"
-            onChange={formHandler}
-          />
-          <input
-            type="email"
-            name="email"
-            value={contact.email}
-            placeholder="Email"
-            onChange={formHandler}
-          />
-          <input
-            type="number"
-            name="phone"
-            value={contact.phone}
-            placeholder="Phone Number"
-            onChange={formHandler}
-          />
+          {inputTags.map((input, index) => (
+            <input
+              key={index}
+              type={input.type}
+              name={input.name}
+              placeholder={input.placeholder}
+              onChange={formHandler}
+              value={contact[input.name]}
+            />
+          ))}
           <button type="submit" onClick={addHandler}>
             Add Contact
           </button>

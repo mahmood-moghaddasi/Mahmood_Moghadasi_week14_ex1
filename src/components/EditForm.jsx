@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../styles/EditForm.module.css";
-
+import inputTags from "../constants/inputs";
 function EditForm({
   contactToEdit,
   setContactToEdit,
@@ -32,41 +32,16 @@ function EditForm({
       <div className={styles.container}>
         <h1>Edit Contact</h1>
         <form className={styles.form}>
-          <input
-            type="text"
-            value={contactToEdit.name}
-            name="name"
-            placeholder="First Name"
-            onChange={formHandler}
-          />
-          <input
-            type="text"
-            value={contactToEdit.lastName}
-            name="lastName"
-            placeholder="Last Name"
-            onChange={formHandler}
-          />
-          <input
-            type="text"
-            value={contactToEdit.job}
-            name="job"
-            placeholder="Job"
-            onChange={formHandler}
-          />
-          <input
-            type="email"
-            value={contactToEdit.email}
-            name="email"
-            placeholder="Email"
-            onChange={formHandler}
-          />
-          <input
-            type="number"
-            value={contactToEdit.phone}
-            name="phone"
-            placeholder="Phone Number"
-            onChange={formHandler}
-          />
+          {inputTags.map((input, index) => (
+            <input
+              key={index}
+              type={input.type}
+              name={input.name}
+              placeholder={input.placeholder}
+              onChange={formHandler}
+              value={contactToEdit[input.name]}
+            />
+          ))}
           <button
             type="submit"
             className={styles.submitButton}
