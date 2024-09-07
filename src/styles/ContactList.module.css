@@ -8,6 +8,7 @@
   border: none;
   border-radius: 10px;
   padding: 1rem 0.5rem;
+  background-color: var(--primary-cerulean);
 }
 .contaiener h1 {
   text-align: center;
@@ -15,14 +16,14 @@
 }
 .contaiener h3 {
   text-align: center;
-  color: gray;
+  color: white;
 }
 .contaiener table {
   width: 100%;
   text-align: center;
 }
 .contaiener tr:nth-child(even) {
-  background-color: rgba(142, 137, 137, 0.5);
+  background-color: rgb(254, 249, 239, 0.8);
 }
 .contaiener tr:first-child:hover {
   opacity: 1;
@@ -39,6 +40,7 @@
   height: 15px;
   position: relative;
   top: 2px;
+  accent-color: var(--primary-green);
 }
 .contaiener button {
   border: none;
@@ -49,10 +51,10 @@
   padding: 3px;
 }
 .delete {
-  background-color: rgb(217, 68, 68);
+  background-color: var(--primary-red-light);
   color: white;
 }
 .edit {
-  background-color: rgb(255, 224, 19);
-  color: white;
+  background-color: var(--primary-sunset);
+  color: gray;
 }
