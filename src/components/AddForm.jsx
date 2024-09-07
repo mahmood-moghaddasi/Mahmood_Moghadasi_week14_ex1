@@ -12,7 +12,6 @@ function AddForm({
   successNotify,
   errorNotify,
 }) {
-  const [isValid, setIsValid] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
   const cancelButtonHandler = () => {
@@ -43,7 +42,6 @@ function AddForm({
     if (contact.phone.length !== 11) {
       errors.phone = "Phone Number is invalid ";
     }
-    console.log(errors);
     setFormErrors(errors);
   };
   const formHandler = (event) => {

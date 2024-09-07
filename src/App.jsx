@@ -79,6 +79,7 @@ function App() {
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
           searchedContacts={searchedContacts}
           successNotify={successNotify}
+          errorNotify={errorNotify}
         />
       )}
       <ToastContainer autoClose={2000} position="bottom-right" />

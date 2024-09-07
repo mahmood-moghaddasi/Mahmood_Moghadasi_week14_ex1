@@ -11,6 +11,7 @@ function ContactList({
   setDisplayDeleteSelectedButton,
   searchedContacts,
   successNotify,
+  errorNotify,
 }) {
   const [displayEditForm, setDisplayEditForm] = useState(false);
   const [contactToEdit, setContactToEdit] = useState({
@@ -61,6 +62,7 @@ function ContactList({
           submitEditChanges={submitEditChanges}
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
           successNotify={successNotify}
+          errorNotify={errorNotify}
         />
       ) : (
         <div className={styles.contaiener}>
