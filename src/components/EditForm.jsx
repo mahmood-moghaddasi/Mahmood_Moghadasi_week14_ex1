@@ -20,18 +20,19 @@ function EditForm({
 
   const validation = () => {
     const errors = {};
-    if (!contactToEdit.name || contactToEdit.name.length < 3) {
-      errors.name = "First name is Required and Must be more than 3 charectre";
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!contact.name || contact.name.length <= 3) {
+      errors.name = "First name is Required and Must be more than 3 character!";
     }
-    if (!contactToEdit.lastName || contactToEdit.lastName.length < 3) {
+    if (!contact.lastName || contact.lastName.length <= 3) {
       errors.lastName =
-        "Last Name is Required and Must be more than 3 charectre";
+        "Last Name is Required and Must be more than 3 character!";
     }
-    if (!contactToEdit.email) {
-      errors.email = "Email is Required ";
+    if (!contact.email || !regex.test(contact.email)) {
+      errors.email = "Email is Required And must be Valid form!";
     }
-    if (contactToEdit.phone.length !== 11) {
-      errors.phone = "Phone Number is invalid ";
+    if (contact.phone.length !== 11) {
+      errors.phone = "Phone Number is invalid! ";
     }
     setFormErrors(errors);
   };
