@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
 import inputTags from "../constants/inputs";
@@ -10,7 +10,11 @@ function AddForm({
   setContact,
   setDisplayDeleteSelectedButton,
   successNotify,
+  errorNotify,
 }) {
+  const [isValid, setIsValid] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+
   const cancelButtonHandler = () => {
     setAddFormDisplay(false);
     setDisplayDeleteSelectedButton(true);
@@ -23,6 +27,25 @@ function AddForm({
       id: "",
     });
   };
+
+  const validation = () => {
+    const errors = {};
+    if (!contact.name || contact.name.length < 3) {
+      errors.name = "First name is Required and Must be more than 3 charectre";
+    }
+    if (!contact.lastName || contact.lastName.length < 3) {
+      errors.lastName =
+        "Last Name is Required and Must be more than 3 charectre";
+    }
+    if (!contact.email) {
+      errors.email = "Email is Required ";
+    }
+    if (contact.phone.length !== 11) {
+      errors.phone = "Phone Number is invalid ";
+    }
+    console.log(errors);
+    setFormErrors(errors);
+  };
   const formHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -30,19 +53,26 @@ function AddForm({
   };
   const addHandler = (event) => {
     event.preventDefault();
-    setContacts([...contacts, contact]);
-    setContact({
-      name: "",
-      lastName: "",
-      job: "",
-      email: "",
-      phone: 0,
-      id: "",
-    });
-    setAddFormDisplay(false);
-    setDisplayDeleteSelectedButton(true);
-    successNotify("Contact Successfuly added!");
+
+    if (Object.keys(formErrors).length === 0) {
+      setContacts([...contacts, contact]);
+      setContact({
+        name: "",
+        lastName: "",
+        job: "",
+        email: "",
+        phone: 0,
+        id: "",
+      });
+      setAddFormDisplay(false);
+      setDisplayDeleteSelectedButton(true);
+      successNotify("Contact Successfuly added!");
+    } else {
+      errorNotify("form not valid");
+    }
   };
+
+  useEffect(validation, [contact]);
 
   return (
     <>
@@ -50,14 +80,19 @@ function AddForm({
         <h1>Add Contact</h1>
         <form className={styles.form}>
           {inputTags.map((input, index) => (
-            <input
-              key={index}
-              type={input.type}
-              name={input.name}
-              placeholder={input.placeholder}
-              onChange={formHandler}
-              value={contact[input.name]}
-            />
+            <>
+              <input
+                key={index}
+                type={input.type}
+                name={input.name}
+                placeholder={input.placeholder}
+                onChange={formHandler}
+                value={contact[input.name]}
+              />
+              {formErrors[input.name] && (
+                <span className={styles.error}>{formErrors[input.name]}</span>
+              )}
+            </>
           ))}
           <button type="submit" onClick={addHandler}>
             Add Contact

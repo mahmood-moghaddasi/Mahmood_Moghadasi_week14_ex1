@@ -67,6 +67,7 @@ function App() {
           setContact={setContact}
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
           successNotify={successNotify}
+          errorNotify={errorNotify}
         />
       ) : (
         <ContactList
