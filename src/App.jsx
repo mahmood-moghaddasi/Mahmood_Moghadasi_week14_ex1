@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import AddForm from "./components/AddForm";
 import Header from "./components/Header";
 import ContactList from "./components/ContactList";
@@ -10,6 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // toast
 
+import ContactProvider from "./context/contactProvider";
+
 function App() {
   const successNotify = (message) => {
     toast.success(message);
@@ -20,68 +22,37 @@ function App() {
   const [diplayDeleteSelectedButton, setDisplayDeleteSelectedButton] =
     useState(true);
   const [AddFormDisplay, setAddFormDisplay] = useState(false);
-  const [contacts, setContacts] = useState([]);
-  const [contact, setContact] = useState({
-    name: "",
-    lastName: "",
-    job: "",
-    email: "",
-    phone: 0,
-    id: "",
-  });
-  const [selectedContactsId, setSelectedContactsId] = useState([]);
+
   const [searchedContacts, setSearchedContacts] = useState([]);
-
-  const deleteHandler = (id) => {
-    const newContacts = contacts.filter((contact) => contact.id !== id);
-    setContacts(newContacts);
-    successNotify("Contact Successfuly Deleted!");
-  };
-
-  const deleteSelected = () => {
-    const newContacts = contacts.filter((contact) => {
-      if (!selectedContactsId.includes(contact.id)) return contact;
-    });
-    setContacts(newContacts);
-    successNotify("Contacts Successfuly Deleted!");
-  };
 
   return (
     <>
-      <Header
-        setAddFormDisplay={setAddFormDisplay}
-        deleteSelected={deleteSelected}
-        AddFormDisplay={AddFormDisplay}
-        diplayDeleteSelectedButton={diplayDeleteSelectedButton}
-        setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
-        contacts={contacts}
-        setSearchedContacts={setSearchedContacts}
-      />
-
-      {AddFormDisplay ? (
-        <AddForm
+      <ContactProvider>
+        <Header
           setAddFormDisplay={setAddFormDisplay}
-          contacts={contacts}
-          setContacts={setContacts}
-          contact={contact}
-          setContact={setContact}
+          diplayDeleteSelectedButton={diplayDeleteSelectedButton}
           setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
+          setSearchedContacts={setSearchedContacts}
           successNotify={successNotify}
-          errorNotify={errorNotify}
         />
-      ) : (
-        <ContactList
-          contacts={contacts}
-          deleteHandler={deleteHandler}
-          selectedContactsId={selectedContactsId}
-          setSelectedContactsId={setSelectedContactsId}
-          setContacts={setContacts}
-          setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
-          searchedContacts={searchedContacts}
-          successNotify={successNotify}
-          errorNotify={errorNotify}
-        />
-      )}
+
+        {AddFormDisplay ? (
+          <AddForm
+            setAddFormDisplay={setAddFormDisplay}
+            setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
+            successNotify={successNotify}
+            errorNotify={errorNotify}
+          />
+        ) : (
+          <ContactList
+            setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
+            searchedContacts={searchedContacts}
+            successNotify={successNotify}
+            errorNotify={errorNotify}
+          />
+        )}
+      </ContactProvider>
+
       <ToastContainer autoClose={2000} position="bottom-right" />
     </>
   );

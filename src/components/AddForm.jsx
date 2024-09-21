@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ContactContext } from "../context/contactProvider";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
 import inputTags from "../constants/inputs";
 function AddForm({
   setAddFormDisplay,
-  contacts,
-  setContacts,
-  contact,
-  setContact,
   setDisplayDeleteSelectedButton,
   successNotify,
   errorNotify,
 }) {
+  const { contact, setContact, contacts, setContacts } =
+    useContext(ContactContext);
+
   const [formErrors, setFormErrors] = useState({});
 
   const cancelButtonHandler = () => {

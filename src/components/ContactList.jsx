@@ -1,18 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "../styles/ContactList.module.css";
 import EditForm from "./EditForm";
+import { ContactContext } from "../context/contactProvider";
 
 function ContactList({
-  contacts,
-  deleteHandler,
-  selectedContactsId,
-  setSelectedContactsId,
-  setContacts,
   setDisplayDeleteSelectedButton,
   searchedContacts,
   successNotify,
   errorNotify,
 }) {
+  const { contacts, setContacts, selectedContactsId, setSelectedContactsId } =
+    useContext(ContactContext);
   const [displayEditForm, setDisplayEditForm] = useState(false);
   const [contactToEdit, setContactToEdit] = useState({
     name: "",
@@ -52,6 +50,12 @@ function ContactList({
     if (flag === true) return;
     setSelectedContactsId([...selectedContactsId, id]);
   };
+  const deleteHandler = (id) => {
+    const newContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(newContacts);
+    successNotify("Contact Successfuly Deleted!");
+  };
+
   return (
     <>
       {displayEditForm ? (
