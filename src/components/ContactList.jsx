@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import styles from "../styles/ContactList.module.css";
 import EditForm from "./EditForm";
 import { ContactContext } from "../context/contactProvider";
+import axios from "axios";
 
 function ContactList({
   setDisplayDeleteSelectedButton,
@@ -9,7 +10,7 @@ function ContactList({
   successNotify,
   errorNotify,
 }) {
-  const { contacts, setContacts, selectedContactsId, setSelectedContactsId } =
+  const { contacts, selectedContactsId, setSelectedContactsId } =
     useContext(ContactContext);
   const [displayEditForm, setDisplayEditForm] = useState(false);
   const [contactToEdit, setContactToEdit] = useState({
@@ -21,10 +22,10 @@ function ContactList({
     id: "",
   });
   const submitEditChanges = () => {
-    const newContacts = contacts.filter(
-      (contact) => contact.id !== contactToEdit.id
+    axios.put(
+      `http://localhost:8000/contacts/${contactToEdit.id}`,
+      contactToEdit
     );
-    setContacts([...newContacts, contactToEdit]);
   };
   const editContactHandler = (id) => {
     setDisplayEditForm(true);
@@ -51,8 +52,7 @@ function ContactList({
     setSelectedContactsId([...selectedContactsId, id]);
   };
   const deleteHandler = (id) => {
-    const newContacts = contacts.filter((contact) => contact.id !== id);
-    setContacts(newContacts);
+    axios.delete(`http://localhost:8000/contacts/${id}`);
     successNotify("Contact Successfuly Deleted!");
   };
 

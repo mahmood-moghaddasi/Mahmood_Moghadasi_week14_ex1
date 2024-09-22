@@ -3,6 +3,7 @@ import { ContactContext } from "../context/contactProvider";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
 import inputTags from "../constants/inputs";
+import axios from "axios";
 function AddForm({
   setAddFormDisplay,
   setDisplayDeleteSelectedButton,
@@ -55,6 +56,7 @@ function AddForm({
 
     if (Object.keys(formErrors).length === 0) {
       setContacts([...contacts, contact]);
+      axios.post("http://localhost:8000/contacts", { ...contact });
       setContact({
         name: "",
         lastName: "",

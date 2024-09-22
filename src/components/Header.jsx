@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styles from "../styles/Header.module.css";
 import Search from "./Search";
 import { ContactContext } from "../context/contactProvider";
+import axios from "axios";
 
 function Header({
   setAddFormDisplay,
@@ -18,10 +19,11 @@ function Header({
   };
 
   const deleteSelected = () => {
-    const newContacts = contacts.filter((contact) => {
-      if (!selectedContactsId.includes(contact.id)) return contact;
+    contacts.map((contact) => {
+      if (selectedContactsId.includes(contact.id))
+        axios.delete(`http://localhost:8000/contacts/${contact.id}`);
     });
-    setContacts(newContacts);
+
     successNotify("Contacts Successfuly Deleted!");
   };
 
