@@ -18,7 +18,8 @@ function ContactProvider({ children }) {
   useEffect(() => {
     axios
       .get("http://localhost:8000/contacts")
-      .then((res) => setContacts(res.data));
+      .then((res) => setContacts(res.data))
+      .catch((err) => console.log(err));
   }, [contacts]);
 
   return (

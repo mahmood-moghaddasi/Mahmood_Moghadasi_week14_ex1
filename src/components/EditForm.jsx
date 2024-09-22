@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../styles/EditForm.module.css";
 import inputTags from "../constants/inputs";
 import { useState, useEffect } from "react";
-import axios from "axios";
 function EditForm({
   contactToEdit,
   setContactToEdit,
