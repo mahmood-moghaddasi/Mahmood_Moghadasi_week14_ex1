@@ -1,22 +1,23 @@
 import { useContext, useEffect, useState } from "react";
-import { ContactContext } from "../context/contactProvider";
+import { ContactContext } from "../context/ContactProvider";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
 import inputTags from "../constants/inputs";
 import axios from "axios";
-function AddForm({
-  setAddFormDisplay,
+import { useNavigate } from "react-router-dom";
+function AddFormPage({
   setDisplayDeleteSelectedButton,
   successNotify,
   errorNotify,
 }) {
+  const navigate = useNavigate();
   const { contact, setContact, contacts, setContacts } =
     useContext(ContactContext);
 
   const [formErrors, setFormErrors] = useState({});
 
   const cancelButtonHandler = () => {
-    setAddFormDisplay(false);
+    navigate("/");
     setDisplayDeleteSelectedButton(true);
     setContact({
       name: "",
@@ -65,7 +66,7 @@ function AddForm({
         phone: 0,
         id: "",
       });
-      setAddFormDisplay(false);
+      navigate("/");
       setDisplayDeleteSelectedButton(true);
       successNotify("Contact Successfuly added!");
     } else {
@@ -107,4 +108,4 @@ function AddForm({
   );
 }
 
-export default AddForm;
+export default AddFormPage;

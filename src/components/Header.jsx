@@ -1,28 +1,35 @@
 import { useContext } from "react";
 import styles from "../styles/Header.module.css";
 import Search from "./Search";
-import { ContactContext } from "../context/contactProvider";
+import { ContactContext } from "../context/ContactProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Header({
-  setAddFormDisplay,
   diplayDeleteSelectedButton,
   setDisplayDeleteSelectedButton,
   setSearchedContacts,
   successNotify,
+  errorNotify,
 }) {
-  const { contacts, setContacts, selectedContactsId } =
+  const navigate = useNavigate();
+  const { contacts, selectedContactsId, setSelectedContactsId } =
     useContext(ContactContext);
   const AddContactDisplayHandler = () => {
-    setAddFormDisplay(true);
+    navigate("add");
     setDisplayDeleteSelectedButton(false);
   };
 
   const deleteSelected = () => {
+    if (selectedContactsId.length == 0) {
+      errorNotify("There is no Contact selected");
+      return;
+    }
     contacts.map((contact) => {
       if (selectedContactsId.includes(contact.id))
         axios.delete(`http://localhost:8000/contacts/${contact.id}`);
     });
+    setSelectedContactsId([]);
 
     successNotify("Contacts Successfuly Deleted!");
   };

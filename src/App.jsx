@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import AddForm from "./components/AddForm";
-import Header from "./components/Header";
-import ContactList from "./components/ContactList";
+import AddFormPage from "./pages/AddFormPage";
+import ContactListPage from "./pages/ContactListPage";
 // toast
 
 import React from "react";
@@ -10,8 +9,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // toast
 
-import ContactProvider from "./context/contactProvider";
-import axios from "axios";
+import ContactProvider from "./context/ContactProvider";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const successNotify = (message) => {
@@ -22,38 +22,57 @@ function App() {
   };
   const [diplayDeleteSelectedButton, setDisplayDeleteSelectedButton] =
     useState(true);
-  const [AddFormDisplay, setAddFormDisplay] = useState(false);
 
   const [searchedContacts, setSearchedContacts] = useState([]);
 
   return (
     <>
       <ContactProvider>
-        <Header
-          setAddFormDisplay={setAddFormDisplay}
-          diplayDeleteSelectedButton={diplayDeleteSelectedButton}
-          setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
-          setSearchedContacts={setSearchedContacts}
-          successNotify={successNotify}
-        />
-
-        {AddFormDisplay ? (
-          <AddForm
-            setAddFormDisplay={setAddFormDisplay}
-            setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
-            successNotify={successNotify}
-            errorNotify={errorNotify}
-          />
-        ) : (
-          <ContactList
-            setDisplayDeleteSelectedButton={setDisplayDeleteSelectedButton}
-            searchedContacts={searchedContacts}
-            successNotify={successNotify}
-            errorNotify={errorNotify}
-          />
-        )}
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  diplayDeleteSelectedButton={diplayDeleteSelectedButton}
+                  setDisplayDeleteSelectedButton={
+                    setDisplayDeleteSelectedButton
+                  }
+                  setSearchedContacts={setSearchedContacts}
+                  successNotify={successNotify}
+                  errorNotify={errorNotify}
+                />
+              }
+            >
+              <Route
+                path="add"
+                element={
+                  <AddFormPage
+                    setDisplayDeleteSelectedButton={
+                      setDisplayDeleteSelectedButton
+                    }
+                    successNotify={successNotify}
+                    errorNotify={errorNotify}
+                  />
+                }
+              />
+              <Route
+                path="/"
+                element={
+                  <ContactListPage
+                    setDisplayDeleteSelectedButton={
+                      setDisplayDeleteSelectedButton
+                    }
+                    searchedContacts={searchedContacts}
+                    successNotify={successNotify}
+                    errorNotify={errorNotify}
+                  />
+                }
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </ContactProvider>
-
       <ToastContainer autoClose={2000} position="bottom-right" />
     </>
   );

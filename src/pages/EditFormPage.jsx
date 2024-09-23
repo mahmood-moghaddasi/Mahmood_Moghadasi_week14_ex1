@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/EditForm.module.css";
 import inputTags from "../constants/inputs";
 import { useState, useEffect } from "react";
-function EditForm({
+function EditFormPage({
   contactToEdit,
   setContactToEdit,
   setDisplayEditForm,
@@ -89,4 +89,4 @@ function EditForm({
   );
 }
 
-export default EditForm;
+export default EditFormPage;

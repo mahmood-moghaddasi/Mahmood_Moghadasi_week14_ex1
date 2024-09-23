@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import styles from "../styles/ContactList.module.css";
-import EditForm from "./EditForm";
-import { ContactContext } from "../context/contactProvider";
+import EditFormPage from "./EditFormPage";
+import { ContactContext } from "../context/ContactProvider";
 import axios from "axios";
 
-function ContactList({
+function ContactListPage({
   setDisplayDeleteSelectedButton,
   searchedContacts,
   successNotify,
@@ -59,7 +59,7 @@ function ContactList({
   return (
     <>
       {displayEditForm ? (
-        <EditForm
+        <EditFormPage
           contactToEdit={contactToEdit}
           setContactToEdit={setContactToEdit}
           setDisplayEditForm={setDisplayEditForm}
@@ -158,4 +158,4 @@ function ContactList({
   );
 }
 
-export default ContactList;
+export default ContactListPage;
