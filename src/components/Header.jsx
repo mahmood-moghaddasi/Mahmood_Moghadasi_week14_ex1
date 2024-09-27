@@ -2,8 +2,8 @@ import { useContext } from "react";
 import styles from "../styles/Header.module.css";
 import Search from "./Search";
 import { ContactContext } from "../context/ContactProvider";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../services/config";
 
 function Header({
   diplayDeleteSelectedButton,
@@ -27,7 +27,7 @@ function Header({
     }
     contacts.map((contact) => {
       if (selectedContactsId.includes(contact.id))
-        axios.delete(`http://localhost:8000/contacts/${contact.id}`);
+        api.delete(`/contacts/${contact.id}`);
     });
     setSelectedContactsId([]);
 

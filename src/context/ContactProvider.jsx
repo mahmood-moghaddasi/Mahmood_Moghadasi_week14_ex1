@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import api from "../services/config";
 
 export const ContactContext = createContext();
 
@@ -16,8 +17,8 @@ function ContactProvider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [selectedContactsId, setSelectedContactsId] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/contacts")
+    api
+      .get("/contacts")
       .then((res) => setContacts(res.data))
       .catch((err) => console.log(err));
   }, [contacts]);

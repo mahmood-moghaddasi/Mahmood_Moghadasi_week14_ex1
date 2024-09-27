@@ -3,8 +3,8 @@ import { ContactContext } from "../context/ContactProvider";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../styles/AddForm.module.css";
 import inputTags from "../constants/inputs";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../services/config";
 function AddFormPage({
   setDisplayDeleteSelectedButton,
   successNotify,
@@ -57,7 +57,7 @@ function AddFormPage({
 
     if (Object.keys(formErrors).length === 0) {
       setContacts([...contacts, contact]);
-      axios.post("http://localhost:8000/contacts", { ...contact });
+      api.post("/contacts", { ...contact });
       setContact({
         name: "",
         lastName: "",
